@@ -1,0 +1,109 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user plan and teaching statistics.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "plan": { "type": "string", "enum": ["free", "starter", "pro", "elite"] },
+        "totalSessions": { "type": "number" },
+        "streak": { "type": "number" },
+        "lastActive": { "type": "string", "format": "date-time" },
+        "subscriptionId": { "type": "string" },
+        "studyTimeToday": { "type": "string" },
+        "accuracyRate": { "type": "number" },
+        "class": { "type": "string" },
+        "board": { "type": "string" },
+        "syllabus": { "type": "object" },
+        "syllabusSources": { "type": "array" },
+        "subjects": { "type": "array" },
+        "subjectsProgress": { "type": "object" },
+        "flashcardsHistory": { "type": "array" },
+        "testHistory": { "type": "array" },
+        "flashcards": { "type": "array" }
+      },
+      "required": ["uid", "email", "plan"]
+    },
+    "Usage": {
+      "title": "Daily Usage Tracking",
+      "description": "Track per-user usage limits.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "chatCount": { "type": "number" },
+        "notebookCount": { "type": "number" }
+      },
+      "required": ["userId", "date"]
+    },
+    "Chat": {
+      "title": "Chat Session",
+      "description": "A conversation with Lunito.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastMessageAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title"]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "Individual message in a chat.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "assistant"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["role", "content", "timestamp"]
+    },
+    "Notebook": {
+      "title": "Notebook",
+      "description": "Calming notebook storage.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "content": { "type": "string" },
+              "pageNumber": { "type": "number" }
+            }
+          }
+        }
+      },
+      "required": ["userId", "title"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data."
+    },
+    "/users/{userId}/usage/{date}": {
+      "schema": "Usage",
+      "description": "Daily usage tracking."
+    },
+    "/chats/{chatId}": {
+      "schema": "Chat",
+      "description": "Shared chat metadata."
+    },
+    "/chats/{chatId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages within a chat."
+    },
+    "/notebooks/{notebookId}": {
+      "schema": "Notebook",
+      "description": "User notebook pages."
+    }
+  }
+}
