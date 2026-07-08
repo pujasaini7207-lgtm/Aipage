@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;550;750&family=Kalam:wght@400;700&family=Architects+Daughter&display=swap');
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-display: "Inter", "Lexend", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-handwriting: "Kalam", "Caveat", "Architects Daughter", cursive;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Premium ChatGPT Inspired Light Color Tokens */
+  --color-primary: #10A37F;
+  --color-secondary: #F7F7F8;
+  --color-accent: #10A37F;
+  --color-border-custom: #E5E5E5;
+  --color-text-primary: #111111;
+  --color-text-secondary: #666666;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-[#111111] antialiased overflow-x-hidden;
+    font-family: var(--font-sans);
+  }
+}
+
+/* Custom Scrollbar for Socratic workspaces */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5E5E5;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D1D1D1;
+}
+
+/* Notebook visual styling */
+.notebook-page {
+  background: #FFFFFF;
+  border-left: 2px solid #10A37F;
+  padding-left: 1.5rem;
+  font-family: var(--font-sans);
+}
+
+.math-block {
+  @apply my-4 overflow-x-auto max-w-full text-center py-4 px-5 bg-[#F7F7F8] rounded-xl border border-[#E5E5E5] text-[#111111] shadow-none;
+}
+
+.math-inline {
+  @apply mx-1 inline-block align-middle font-sans text-emerald-700 font-medium;
+}
+
+/* Callout Box styling for Notion-like Notebook */
+.callout-blue {
+  @apply bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg text-blue-900 my-4 text-sm leading-relaxed;
+}
+
+.callout-green {
+  @apply bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg text-emerald-950 my-4 text-sm leading-relaxed;
+}
+
+.callout-orange {
+  @apply bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg text-amber-950 my-4 text-sm leading-relaxed;
+}
+
+.callout-red {
+  @apply bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg text-red-950 my-4 text-sm leading-relaxed;
+}
+
+/* Cards flip logic for revision deck */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
